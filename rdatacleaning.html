@@ -1716,14 +1716,13 @@ as_tibble(crime4)</code></pre>
 ## $ vehicles   &lt;list&gt; &lt;&quot;Snowspeeder&quot;, &quot;Imperial Speeder Bike&quot;&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, &quot;Imp…
 ## $ starships  &lt;list&gt; &lt;&quot;X-wing&quot;, &quot;Imperial shuttle&quot;&gt;, &lt;&gt;, &lt;&gt;, &quot;TIE Advanced x1&quot;,…</code></pre>
 <ul>
-<li>character<em><cha></em> for words<br />
-</li>
-<li>integer<em><int></em> for whole numbers<br />
-</li>
+<li>character<em><cha></em> for words.</li>
+<li>integer<em><int></em> for whole numbers.</li>
 <li>double<em><dbl></em> for numbers with decimal points
-(fraction)<br />
-</li>
-<li>factor<em><fct></em> for categories</li>
+(fraction).</li>
+<li>factor<em><fct></em> for categories. <u>You must change your
+category data into this type, or they are just characters or numeric
+values, which are the worst case</u>.</li>
 </ul>
 </div>
 <div id="pipes" class="section level3">
@@ -1788,8 +1787,19 @@ glimpse(data)</code></pre>
 <pre class="r"><code>1 != 1</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 </div>
-<div id="mutate-select-as.factor-summary" class="section level3">
-<h3>mutate, select, as.factor, summary</h3>
+<div id="mutate-select-summary" class="section level3">
+<h3>mutate(), select(), summary()</h3>
+<ul>
+<li><strong>mutate()</strong> can generate new variables or change the
+value of a certain variable.</li>
+<li><strong>select()</strong> can select the variables you need (for the
+next step), those not selected would not be included in the next
+step.</li>
+<li><strong>summary()</strong> can give some basic distribution
+information for the object you input (a dataset or several variables).
+<u>It is a good habit to use summary to check missing values or wrong
+values</u>.</li>
+</ul>
 <pre class="r"><code>data = starwars %&gt;% 
   mutate(sex = as.factor(sex))
 summary(data$sex)</code></pre>
@@ -1814,6 +1824,25 @@ summary(data$sex)</code></pre>
 ##  -1:11  
 ##  0 :16  
 ##  1 :60</code></pre>
+</div>
+<div id="change-value-type-by-as.factor-as.numeric" class="section level3">
+<h3>Change value type by as.factor(), as.numeric()</h3>
+<pre class="r"><code>starwars %&gt;% 
+  mutate(hair_color = as.factor(hair_color)) %&gt;% 
+  select(hair_color) %&gt;% 
+  summary()</code></pre>
+<pre><code>##    hair_color
+##  none   :38  
+##  brown  :18  
+##  black  :13  
+##  white  : 4  
+##  blond  : 3  
+##  (Other): 6  
+##  NA&#39;s   : 5</code></pre>
+<pre class="r"><code>unique(starwars$hair_color)</code></pre>
+<pre><code>##  [1] &quot;blond&quot;         NA              &quot;none&quot;          &quot;brown&quot;        
+##  [5] &quot;brown, grey&quot;   &quot;black&quot;         &quot;auburn, white&quot; &quot;auburn, grey&quot; 
+##  [9] &quot;white&quot;         &quot;grey&quot;          &quot;auburn&quot;        &quot;blonde&quot;</code></pre>
 </div>
 </div>
 
