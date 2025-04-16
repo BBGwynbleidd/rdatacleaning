@@ -1,0 +1,191 @@
+---
+title: "Data Cleaning"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    #number_section: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(wooldridge)
+library(palmerpenguins)
+```
+
+## Get Ready
+### Download R and RStudio
+
+Choose the one based on your own OS from https://posit.co/download/rstudio-desktop/.  
+*Do not include space in the path.
+
+### Tidyverse Package
+
+R includes **R Basics** by its developers and **Tidyverse** by Hadley Wickham ([R for Data Science](https://r4ds.hadley.nz")).
+Answers on Internet, such as Stack Overflow, might use either of them.
+The answer which can solve your problem is the best one for you.
+
+```{r}
+#install.packages("tidyverse")
+library(tidyverse)
+
+```
+
+**install.packages()** is used to download packages archived in [CRAN](https://cran.r-project.org/). But you do not need to download packages every time you use R, just [once for all]{.ul}.  
+**library()** helps load package into your working environment. You need to load your packages [every time you start your RStudio]{.ul}.  
+**Tidyverse** package includes a lot of packages, but you still need to download some packages due to your special needs.
+
+### Set Working Directory
+
+```{r}
+setwd("/Users/bb")
+getwd()
+```
+[Space and characters other than alphabet]{.ul} might cause problems.  
+This step is not necessary, but can save you some time when you need to write your path or file name for multiple times.
+
+### Read Your Data
+
+Tidyverse already includes **readr** package.  
+**haven** package can help read other data in formats of "SPSS", "Stata" and "SAS".  
+**readxl** package can help read *.xlsx* and *.xls*. 
+
+```{r}
+#read_csv() # for ,-seperated csv file
+#read_csv2() # for ;-seperated csv file, since you may have , in numbers
+#read_dta()
+#read_xlxs()
+#read_xls()
+#etc., etc.
+```
+
+You need to save the data you read into global environment. It has nothing to do with the original data file saved your disk.
+```{r}
+#data <- data_csv()
+#data_or_any_name_you_like <- data_csv()
+#bb <- data_csv()
+#harry_potter <- data_csv()
+#darth_vader <- data_csv()
+```
+The name refers to the table in the environment. If you give it to another table, then the previous one just disappears.
+
+```{r}
+data <- starwars
+data
+data <- penguins
+data
+```
+
+"<-" is the same as "=", which means "give the value from the right side to the left side".
+```{r}
+data <- starwars
+data
+data = penguins
+data
+```
+
+Encoding is usually causing problem when reading files containing foreign languages. You can fix this problem by **locale()** option in **read_csv()** to set your encoding.
+```{r}
+#read_csv(locale = "_Your Encoding_")
+```
+
+### Read Data from Multiple Files
+```{r}
+list.files()
+list.files(recursive = TRUE) # to read all files in this folder, including those in the folders under this folder.
+```
+You may want to select the wanted files by their format, such as .csv. Then you need **str_detect()** to find them.
+```{r}
+str_detect("data_some_survey.csv", "\\.csv")
+str_detect("rstudio.exe", "\\..csv")
+c("data_some_survey.csv","rstudio.exe","r.exe","long_name_file.somethingelse")
+list = c("data_some_survey.csv","rstudio.exe","r.exe","long_name_file.somethingelse")
+str_detect(list,"\\.csv")
+list[str_detect(list,"\\.csv")]
+```
+
+
+**map()** is basically a way of loop. It runs a certain function to every element in the given list.
+```{r}
+#list = list.files()
+#map(list, read_csv)
+```
+And you may try to combine them into one table once you have cleaned them.
+
+
+## Go for Tidy Data
+### Tidy Data
+
+THREE LAWS OF TIDY DATA:  
+1. Every row is one observation, your unit of analysis.  
+2. Every column is one variable.  
+3. One table is one dataset.
+
+It is not a golden rule for every software.
+
+```{r}
+starwars
+```
+
+Every time of observation has its own row for [panel data]{.ul}.
+
+```{r}
+#crime4
+as_tibble(crime4)
+```
+
+### Data Type
+```{r echo=FALSE}
+data = starwars %>% 
+  mutate(gender = as.factor(gender))
+glimpse(data)
+```
+- character*<cha>* for words  
+- integer*<int>* for whole numbers   
+- double*<dbl>* for numbers with decimal points (fraction)  
+- factor*<fct>* for categories
+
+### Pipes
+%>% or |> is an operator who passes the output of the current step as an object to the next step.
+```{r}
+data = starwars %>% 
+  mutate(gender = as.factor(gender))
+# mutate(
+#   .data,
+#   ...,
+#   .by = NULL,
+#   .keep = c("all", "used", "unused", "none"),
+#   .before = NULL,
+#   .after = NULL
+# )
+glimpse(data)
+```
+
+### Logical Operators
+
+
+### mutate, select, as.factor, summary
+```{r}
+data = starwars %>% 
+  mutate(sex = as.factor(sex))
+summary(data$sex)
+data %>% 
+  mutate(sex = as.factor(if_else(sex == "male", 1, 0))) %>% 
+  select(sex) %>% 
+  summary()
+data %>% 
+  mutate(sex = case_when(sex == "male" ~ 1,
+                         sex == "female" ~ 0,
+                         .default = -1)) %>% 
+  mutate(sex = as.factor(sex)) %>% 
+  select(sex) %>% 
+  summary()
+```
+
+
+
+
+
