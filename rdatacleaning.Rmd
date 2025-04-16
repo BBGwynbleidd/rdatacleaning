@@ -146,10 +146,10 @@ data = starwars %>%
   mutate(gender = as.factor(gender))
 glimpse(data)
 ```
-- character*<cha>* for words  
-- integer*<int>* for whole numbers   
-- double*<dbl>* for numbers with decimal points (fraction)  
-- factor*<fct>* for categories
+- character*<cha>* for words.
+- integer*<int>* for whole numbers.
+- double*<dbl>* for numbers with decimal points (fraction).
+- factor*<fct>* for categories. [You must change your category data into this type, or they are just characters or numeric values, which are the worst case]{.ul}.
 
 ### Pipes
 %>% or |> is an operator who passes the output of the current step as an object to the next step.
@@ -190,7 +190,11 @@ FALSE | FALSE
 ```
 
 
-### mutate, select, as.factor, summary
+### mutate(), select(), summary()
+- **mutate()** can generate new variables or change the value of a certain variable.
+- **select()** can select the variables you need (for the next step), those not selected would not be included in the next step.
+- **summary()** can give some basic distribution information for the object you input (a dataset or several variables). [It is a good habit to use summary to check missing values or wrong values]{.ul}.
+
 ```{r}
 data = starwars %>% 
   mutate(sex = as.factor(sex))
@@ -208,6 +212,15 @@ data %>%
   summary()
 ```
 
+### Change value type by as.factor(), as.numeric()
+```{r}
+starwars %>% 
+  mutate(hair_color = as.factor(hair_color)) %>% 
+  select(hair_color) %>% 
+  summary()
+
+unique(starwars$hair_color)
+```
 
 
 
