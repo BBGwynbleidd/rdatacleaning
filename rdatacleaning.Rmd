@@ -22,6 +22,9 @@ library(palmerpenguins)
 Choose the one based on your own OS from https://posit.co/download/rstudio-desktop/.  
 *Do not include space in the path.
 
+[RCloud](https://posit.cloud/) can also be used.
+
+
 ### Tidyverse Package
 
 R includes **R Basics** by its developers and **Tidyverse** by Hadley Wickham ([R for Data Science](https://r4ds.hadley.nz")).
