@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2025-04-16" />
+<meta name="date" content="2025-04-23" />
 
 <title>Data Cleaning</title>
 
@@ -1479,7 +1479,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Data Cleaning</h1>
-<h4 class="date">2025-04-16</h4>
+<h4 class="date">2025-04-23</h4>
 
 </div>
 
@@ -1645,6 +1645,45 @@ function to every element in the given list.</p>
 #map(list, read_csv)</code></pre>
 <p>And you may try to combine them into one table once you have cleaned
 them.</p>
+<div id="regular-expression" class="section level4">
+<h4>Regular Expression</h4>
+<p><a href="https://media.datacamp.com/legacy/image/upload/v1665049611/Marketing/Blog/Regular_Expressions_Cheat_Sheet.pdf">Regular
+Expression Cheetsheet</a> Regular expression (Regex) is a way to pattern
+strings, which can help you find certain strings contain patterns
+wanted.<br />
+One example is to pick up names you need from a list.</p>
+<pre class="r"><code>list = starwars %&gt;% 
+  filter(str_detect(name,&quot;.\\d+.*&quot;) == F) %&gt;% 
+  .$name
+list</code></pre>
+<pre><code>##  [1] &quot;Luke Skywalker&quot;        &quot;Darth Vader&quot;           &quot;Leia Organa&quot;          
+##  [4] &quot;Owen Lars&quot;             &quot;Beru Whitesun Lars&quot;    &quot;Biggs Darklighter&quot;    
+##  [7] &quot;Obi-Wan Kenobi&quot;        &quot;Anakin Skywalker&quot;      &quot;Wilhuff Tarkin&quot;       
+## [10] &quot;Chewbacca&quot;             &quot;Han Solo&quot;              &quot;Greedo&quot;               
+## [13] &quot;Jabba Desilijic Tiure&quot; &quot;Wedge Antilles&quot;        &quot;Jek Tono Porkins&quot;     
+## [16] &quot;Yoda&quot;                  &quot;Palpatine&quot;             &quot;Boba Fett&quot;            
+## [19] &quot;Bossk&quot;                 &quot;Lando Calrissian&quot;      &quot;Lobot&quot;                
+## [22] &quot;Ackbar&quot;                &quot;Mon Mothma&quot;            &quot;Arvel Crynyd&quot;         
+## [25] &quot;Wicket Systri Warrick&quot; &quot;Nien Nunb&quot;             &quot;Qui-Gon Jinn&quot;         
+## [28] &quot;Nute Gunray&quot;           &quot;Finis Valorum&quot;         &quot;Padmé Amidala&quot;        
+## [31] &quot;Jar Jar Binks&quot;         &quot;Roos Tarpals&quot;          &quot;Rugor Nass&quot;           
+## [34] &quot;Ric Olié&quot;              &quot;Watto&quot;                 &quot;Sebulba&quot;              
+## [37] &quot;Quarsh Panaka&quot;         &quot;Shmi Skywalker&quot;        &quot;Darth Maul&quot;           
+## [40] &quot;Bib Fortuna&quot;           &quot;Ayla Secura&quot;           &quot;Ratts Tyerel&quot;         
+## [43] &quot;Dud Bolt&quot;              &quot;Gasgano&quot;               &quot;Ben Quadinaros&quot;       
+## [46] &quot;Mace Windu&quot;            &quot;Ki-Adi-Mundi&quot;          &quot;Kit Fisto&quot;            
+## [49] &quot;Eeth Koth&quot;             &quot;Adi Gallia&quot;            &quot;Saesee Tiin&quot;          
+## [52] &quot;Yarael Poof&quot;           &quot;Plo Koon&quot;              &quot;Mas Amedda&quot;           
+## [55] &quot;Gregar Typho&quot;          &quot;Cordé&quot;                 &quot;Cliegg Lars&quot;          
+## [58] &quot;Poggle the Lesser&quot;     &quot;Luminara Unduli&quot;       &quot;Barriss Offee&quot;        
+## [61] &quot;Dormé&quot;                 &quot;Dooku&quot;                 &quot;Bail Prestor Organa&quot;  
+## [64] &quot;Jango Fett&quot;            &quot;Zam Wesell&quot;            &quot;Dexter Jettster&quot;      
+## [67] &quot;Lama Su&quot;               &quot;Taun We&quot;               &quot;Jocasta Nu&quot;           
+## [70] &quot;Wat Tambor&quot;            &quot;San Hill&quot;              &quot;Shaak Ti&quot;             
+## [73] &quot;Grievous&quot;              &quot;Tarfful&quot;               &quot;Raymus Antilles&quot;      
+## [76] &quot;Sly Moore&quot;             &quot;Tion Medon&quot;            &quot;Finn&quot;                 
+## [79] &quot;Rey&quot;                   &quot;Poe Dameron&quot;           &quot;Captain Phasma&quot;</code></pre>
+</div>
 </div>
 </div>
 <div id="go-for-tidy-data" class="section level2">
@@ -1895,7 +1934,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
