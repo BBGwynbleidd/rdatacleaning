@@ -1629,7 +1629,7 @@ option in <strong>read_csv()</strong> to set your encoding.</p>
 .csv. Then you need <strong>str_detect()</strong> to find them.</p>
 <pre class="r"><code>str_detect(&quot;data_some_survey.csv&quot;, &quot;\\.csv&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>str_detect(&quot;rstudio.exe&quot;, &quot;\\..csv&quot;)</code></pre>
+<pre class="r"><code>str_detect(&quot;rstudio.exe&quot;, &quot;\\.csv&quot;)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>c(&quot;data_some_survey.csv&quot;,&quot;rstudio.exe&quot;,&quot;r.exe&quot;,&quot;long_name_file.somethingelse&quot;)</code></pre>
 <pre><code>## [1] &quot;data_some_survey.csv&quot;         &quot;rstudio.exe&quot;                 
