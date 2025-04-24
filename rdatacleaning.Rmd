@@ -103,7 +103,7 @@ list.files(recursive = TRUE) # to read all files in this folder, including those
 You may want to select the wanted files by their format, such as .csv. Then you need **str_detect()** to find them.
 ```{r}
 str_detect("data_some_survey.csv", "\\.csv")
-str_detect("rstudio.exe", "\\..csv")
+str_detect("rstudio.exe", "\\.csv")
 c("data_some_survey.csv","rstudio.exe","r.exe","long_name_file.somethingelse")
 list = c("data_some_survey.csv","rstudio.exe","r.exe","long_name_file.somethingelse")
 str_detect(list,"\\.csv")
